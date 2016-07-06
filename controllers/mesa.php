@@ -3,6 +3,7 @@ class Mesa extends Controller {
 
     public function __construct() {
         parent::__construct();
+        Auth::handleLogin();
         $this->view->titulo = 'Mesa';
         $this->view->subTitulo = 'Gerenciar mesas';
     }

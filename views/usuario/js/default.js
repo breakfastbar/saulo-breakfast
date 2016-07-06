@@ -7,7 +7,7 @@ $(function () {
 //        }
 //    });
 
-  
+
 
     $.datepicker.formatDate("yy-mm-dd", new Date(2007, 1 - 1, 26));
     $('#dataNascimento').datepicker({
@@ -22,25 +22,70 @@ $(function () {
     getEndereco($("#cep").val());
 
 
-    $("#adicionarUsuario").submit(function (event) {
+    $("#addEditUsuario").submit(function (event) {
         var url = $(this).attr('action');
         var data = $(this).serialize();
-        alert(data);
         $.post(url, data, function (o) {
-            if (o.tipo == "ERRO") {
-                $('#mensagem').empty();
-                $('#mensagem').append('<div class="alert alert-danger"  role="alert"><strong>' + o.mensagem + '</strong></div>');
+            if (o.tipo != 'ERRO') {
+                window.location = '../'
             } else {
-                $('#mensagem').empty();
-                alert(o.mensagem);
-                location.href = "http://localhost:8080/ContaFacilMVC/usuario";
+                BootstrapDialog.alert({
+                    title: 'Atenção',
+                    message: o.mensagem,
+                    type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                    closable: true, // <-- Default value is false
+                    draggable: true, // <-- Default value is false
+                    buttonLabel: 'Ok', // <-- Default value is 'OK',
+
+                });
             }
+
         }, 'json');
         event.preventDefault();
     });
 });
 
+function deletarUsuario(cpf) {
+    BootstrapDialog.confirm({
+        title: 'ATENÇÃO',
+        message: 'Deseja realmente remover o usuário ? ',
+        type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+        closable: true, // <-- Default value is false
+        draggable: false, // <-- Default value is false
+        btnCancelLabel: 'Não', // <-- Default value is 'Cancel',
+        btnCancelClass: 'btn-danger', // <-- If you didn't specify it, dialog type will be used,
+        btnOKLabel: 'Sim', // <-- Default value is 'OK',
+        btnOKClass: 'btn-default', // <-- If you didn't specify it, dialog type will be used,
+        callback: function (result) {
+            // result will be true if button was click, while it will be false if users close the dialog directly.
+            if (result) {
+                var url = 'deletar';
+                $.post(url, {cpf: cpf}, function (o) {
+                    if (o.tipo != 'ERRO') {
+                        location.reload();
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Atenção',
+                            message: o.mensagem,
+                            type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                            closable: true, // <-- Default value is false
+                            draggable: true, // <-- Default value is false
+                            buttonLabel: 'Ok', // <-- Default value is 'OK',
+
+                        });
+
+                    }
+
+                }, 'json');
+            }
+        }
+    });
+
+
+}
+
 function getEndereco(cep) {
+
     $.ajax({
         type: 'GET',
         url: 'https://viacep.com.br/ws/' + cep + '/json/ ',
@@ -57,14 +102,14 @@ function getEndereco(cep) {
 
     });
 }
-function listaUsuarios(pagina){
+function listaUsuarios(pagina) {
     var gif = {
-            loader: $("<div/>", {class: 'loader'}),
-            container: $('#contLoader')
-        }
-      $.ajax({
+        loader: $("<div/>", {class: 'loader'}),
+        container: $('#contLoader')
+    }
+    $.ajax({
         type: 'GET',
-        url: 'usuario/listUsuarios/'+pagina,
+        url: 'usuario/listUsuarios/' + pagina,
         dataType: "text",
         beforeSend: function () {
             gif.container.append(gif.loader);
@@ -76,6 +121,32 @@ function listaUsuarios(pagina){
 
         }
 
+    });
+
+}
+
+function cancelarAcao(acao) {
+    if (acao == 'criar')
+        msg = 'Deseja realmente cancelar a inserção de um novo usuário?';
+    else
+        msg = 'Deseja realmente cancelar a edição do usuário?';
+
+    BootstrapDialog.confirm({
+        title: 'ATENÇÃO',
+        message: msg,
+        type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+        closable: true, // <-- Default value is false
+        draggable: false, // <-- Default value is false
+        btnCancelLabel: 'Não', // <-- Default value is 'Cancel',
+        btnCancelClass: 'btn-danger', // <-- If you didn't specify it, dialog type will be used,
+        btnOKLabel: 'Sim', // <-- Default value is 'OK',
+        btnOKClass: 'btn-default', // <-- If you didn't specify it, dialog type will be used,
+        callback: function (result) {
+            // result will be true if button was click, while it will be false if users close the dialog directly.
+            if (result) {
+                window.location = '../'
+            }
+        }
     });
 
 }

@@ -7,9 +7,14 @@ class Usuario_Model extends Model {
     }
 
     public function selecionar($cpf) {
-        $usuario = $this->db->select("select * from usuario where cpf = :cpf", array(
+        $aUsuarios = $this->db->select("select *, DATE_FORMAT(us.dataNascimento,'%m/%d/%Y') as dataNascimento from usuario us where cpf = :cpf", array(
             'cpf' => $cpf
         ));
+
+        foreach ($aUsuarios as $value) {
+            $a = new UsuarioDOM($value['cpf'], $value['nome'], $value['dataNascimento'], $value['usuarioSistema'], $value['senha'], $value['nivelAcesso'], $value['email'], $value['telefoneFixo'], $value['telefoneCelular'], $value['cep'], $value['numero'], $value['complemento'], $value['logradouro'], $value['cidade'], $value['estado'], $value['ativo']);
+        }
+        return $a;
     }
 
     public function getUsuarios() {
@@ -38,7 +43,6 @@ class Usuario_Model extends Model {
         $dado2['ativo'] = true;
         unset($dado2['confirmeSenha']);
         $inseriu = $this->db->insert('usuario', $dado2);
-
         if ($inseriu[0] == 00000) {
             $mensagem = array('tipo' => 'INFORMACAO', 'mensagem' => MSG2);
             echo json_encode($mensagem);
@@ -49,20 +53,28 @@ class Usuario_Model extends Model {
     }
 
     public function editSave($data) {
-        $postData = array(
-            'login' => $data['login'],
-            'password' => Hash::create('sha256', $data['password'], HASH_PASSWORD_KEY), 'role' => $data['role']
-        );
-
-        $this->db->update('user', $postData, "`userid` = {$data['userid']}");
+        $dn = explode('/', $data['dataNascimento']);
+        $dnas = date('Y-m-d', mktime(0, 0, 0, $dn[1], $dn[0], $dn[2]));
+        $aleterNas = array('dataNascimento' => $dnas);
+        $dado1 = array_replace($data, $aleterNas);
+        unset($dado1['cpf']);
+        $atualizou = $this->db->update('usuario', $dado1, "`cpf` = '".$data['cpf']."'");
+        
+        if ($atualizou[0] == 00000) {
+            $mensagem = array('tipo' => 'INFORMACAO', 'mensagem' => MSG016);
+            echo json_encode($mensagem);
+        } else {
+            $mensagem = array('tipo' => 'ERRO', 'mensagem' => MSG017);
+            echo json_encode($mensagem);
+        }
     }
 
     public function delete($cpf) {
-       $delete = $this->db->delete('usuario', "cpf = '$cpf'");
-       if($delete){
+        $delete = $this->db->delete('usuario', "cpf = '$cpf'");
+        if ($delete) {
             $mensagem = array('tipo' => 'INFORMACAO', 'mensagem' => MSG4);
             echo json_encode($mensagem);
-       }
+        }
     }
 
 }
