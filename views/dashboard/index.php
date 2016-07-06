@@ -14,12 +14,24 @@
         <!--    Painel de Mesas-->
         <div class="row">
             <?php
-            for ($i = 0; $i < 6; $i++) {
+            foreach ($this->mesas as $mesa) {
+
+                switch ($mesa->getStatus()) {
+                    case '1':
+                        $painel = 'panel-green';
+                        break;
+                    case '2':
+                        $painel = 'panel-red';
+                        break;
+                    case '3':
+                        $painel = 'panel-green';
+                        break;
+                }
                 ?>
 
                 <div class="col-lg-3 col-md-6">                 
-                    <div class="panel panel-green">
-                        <a href="<?= URL ?>comanda">                        
+                    <div class="panel <?php echo $painel ?>">
+                        <a href="<?= URL ?>comanda/listMesa/<?=$mesa->getNumeroMesa();?>">                        
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
@@ -32,39 +44,11 @@
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <span class="pull-left"> <?= "Mesa #" . $i ?></span>
+                                <span class="pull-left"> <?= "Mesa #" . $mesa->getNumeroMesa() ?></span>
                                 <span class="pull-right">Total : R$ 0 </i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>                        
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-            <?php
-            for ($i = 0; $i < 6; $i++) {
-                ?>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <a href="<?= URL ?>comanda">                        
-                            <div class="panel-heading">                                                    
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-list-alt fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">5</div>
-                                        <div>Comanda(s)</div>
-                                    </div>
-                                </div>
-                            </div>                                               
-                            <div class="panel-footer">
-                                <span class="pull-left"><?= "Mesa #" . $i ?></span>
-                                <span class="pull-right">Total : R$ 98,50 </i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
                 <?php

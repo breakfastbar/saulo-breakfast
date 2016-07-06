@@ -26,7 +26,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="20%">Código</th>
-                                                <th>Descrição</th>
+                                                <th>Nome do setor</th>
                                                 <th class="text-center">Ações</th>
                                             </tr>
                                         </thead>                                  
@@ -65,9 +65,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Descrição</label>
-                                <input type="text" class="form-control" name="descricao" required="">
-                                <p class="help-block">Informe a descrição da setor.</p>
+                                <label>Nome do setor:</label>
+                                <input type="text" class="form-control" name="descricao" placeholder="Informe aqui o nome do setor a ser cadastrado" required="">
+                                
                             </div>
                         </div>
                     </div>    

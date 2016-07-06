@@ -7,11 +7,10 @@
 <form method="post" action="<?= URL . 'setor/salvarEdicao/' . $this->setorSingleLista[0]['codSetor'] ?>">
     <div class="modal-body">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="form-group">
-                    <label>Descrição</label>
+                    <label>Nome do setor:</label>
                     <input type="text" class="form-control" name="descricao" value="<?= $this->setorSingleLista[0]['descricao'] ?>"  required="">
-                    <p class="help-block">Informe a nova descrição da setor.</p>
                 </div>
             </div>
         </div>    

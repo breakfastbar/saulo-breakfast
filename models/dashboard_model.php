@@ -6,26 +6,13 @@ class Dashboard_Model extends Model {
         parent::__construct();
     }
     
-    public function xhrInsert() 
-    {
-        $text = $_POST['text'];
-        
-        $this->db->insert('data', array('text' => $text));
-        
-        $data = array('text' => $text, 'id' => $this->db->lastInsertId());
-        echo json_encode($data);
+    public function listaMesa(){
+        $amesas = $this->db->select('select * from mesa where ativo = 1');
+        $mesas = array();
+        foreach ($amesas as $value) {
+            $a = new MesaDOM($value['numeroMesa'], $value['status']);
+            array_push($mesas, $a);
+        }
+        return $mesas;
     }
-    
-    public function xhrGetListings()
-    {
-        $result = $this->db->select("SELECT * FROM data");
-        echo json_encode($result);
-    }
-    
-    public function xhrDeleteListing()
-    {
-        $id = (int) $_POST['id'];
-        $this->db->delete('data', "id = '$id'");
-    }
-
 }

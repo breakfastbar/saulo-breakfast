@@ -22,12 +22,12 @@ $(function () {
     getEndereco($("#cep").val());
 
 
-    $("#adicionarPedido").submit(function (event) {
+    $("#addEditMesa").submit(function (event) {
         var url = $(this).attr('action');
         var data = $(this).serialize();
         $.post(url, data, function (o) {
             if (o.tipo != 'ERRO') {
-                location.reload();
+                window.location = '../mesa'
             } else {
                 BootstrapDialog.alert({
                     title: 'Atenção',
@@ -36,7 +36,6 @@ $(function () {
                     closable: true, // <-- Default value is false
                     draggable: true, // <-- Default value is false
                     buttonLabel: 'Ok', // <-- Default value is 'OK',
-
                 });
             }
 
@@ -45,10 +44,10 @@ $(function () {
     });
 });
 
-function deletarUsuario(cpf) {
+function deletarMesa(numeroMesa) {
     BootstrapDialog.confirm({
         title: 'ATENÇÃO',
-        message: 'Deseja realmente remover o usuário ? ',
+        message: 'Deseja realmente remover a mesa ? ',
         type: BootstrapDialog.TYPE_DANGER, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
         closable: true, // <-- Default value is false
         draggable: false, // <-- Default value is false
@@ -59,8 +58,8 @@ function deletarUsuario(cpf) {
         callback: function (result) {
             // result will be true if button was click, while it will be false if users close the dialog directly.
             if (result) {
-                var url = 'deletar';
-                $.post(url, {cpf: cpf}, function (o) {
+                var url = 'mesa/deletar';
+                $.post(url, {numeroMesa: numeroMesa}, function (o) {
                     if (o.tipo != 'ERRO') {
                         location.reload();
                     } else {
@@ -127,9 +126,9 @@ function listaUsuarios(pagina) {
 
 function cancelarAcao(acao) {
     if (acao == 'criar')
-        msg = 'Deseja realmente cancelar a inserção de um novo usuário?';
+        msg = 'Deseja realmente cancelar a inserção de uma nova mesa?';
     else
-        msg = 'Deseja realmente cancelar a edição do usuário?';
+        msg = 'Deseja realmente cancelar a edição da mesa?';
 
     BootstrapDialog.confirm({
         title: 'ATENÇÃO',
@@ -144,36 +143,9 @@ function cancelarAcao(acao) {
         callback: function (result) {
             // result will be true if button was click, while it will be false if users close the dialog directly.
             if (result) {
-                window.location = '../'
+                window.location = '../mesa'
             }
         }
     });
 
-}
-
-function selecionarProduto(codigo) {
-
-    $.ajax({
-    type: 'GET',
-            url: 'produto/selecionar/' + codigo,
-            dataType: "json",
-            success: function (o) {
-                var person = {fname: "John", lname: "Doe", age: 25};
-                    $("#descricao").val(o.descricao);
-                    $("#valorProduto").val(o.valor);
-                    $("#valor").val(o.valor);
-
-                }
-
-            });
-}
-
-
-function atualizarValor(){
-     var valor = parseDouble($("#valorProduto").val());
-     alert(valor);
-     
-     var valorNew = parseInt($('#quantidade').val()) * valor;
-     $("#valor").val(valorNew);
-     
 }

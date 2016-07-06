@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +16,7 @@ require_once('barcode.inc.php');
 class ComandaDOM extends Exception {
 
     private $codigo;
-    private $status = ABERTA;
+    private $status = C_ABERTA;
     private $valorPago;
     private $observacao;
 
@@ -26,17 +25,19 @@ class ComandaDOM extends Exception {
      */
     private $pedidos = array();
     private $mesa;
+    private $criadaPor;
+    private $fechadaPor;
 
     /**
      * Construtor do Objeto Comanda 
      * <p>Constroi um objeto do tipo comanda, gerando o codigo da comanda atomatico com seu codigo de barra </p><br> 
      * $mesa => objeto do tipo Mesa <br>   
      */
-    public function __construct(Mesa $mesa, $codigo = null) {
+    public function __construct(MesaDOM $mesa, $codigo = null) {
         $this->mesa = $mesa;
         if ($codigo == null) {
             $this->codigo = $this->gerarCodigo();
-        new barCodeGenrator($this->codigo, 1, 'codeBarra/' . $this->codigo . '.png');        
+            //new barCodeGenrator($this->codigo, 1, 'codeBarra/' . $this->codigo . '.png');        
         } else {
             $this->codigo = $codigo;
         }
@@ -67,9 +68,16 @@ class ComandaDOM extends Exception {
         foreach ($this->pedidos as $pedido) {
             $valorTotal += $pedido->getValorTotal();
         }
-
-
         return $valorTotal;
+    }
+
+    /**
+     * Calcula o valor total da pedidos , e retornar seu valor.<br>
+     * 
+     * 
+     */
+    public function getNumeroPedidos() {
+        return count($this->pedidos);
     }
 
     /**
@@ -151,9 +159,29 @@ class ComandaDOM extends Exception {
                 }
             }
             $this->status = C_FECHADA;
-        }else{
+        } else {
             throw new Exception("A comanda em questão já foi fechada");
         }
+    }
+
+    function getStatus() {
+        return $this->status;
+    }
+
+    function getValorPago() {
+        return $this->valorPago;
+    }
+
+    function getObservacao() {
+        return $this->observacao;
+    }
+
+    function getCriadaPor() {
+        return $this->criadaPor;
+    }
+
+    function getFechadaPor() {
+        return $this->fechadaPor;
     }
 
 }

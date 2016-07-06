@@ -8,7 +8,7 @@
         </div>
 
         <div class="text-center">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".inserirComanda">
+            <button type="button" class="btn btn-primary" onclick="addComanda('<?=$this->mesa?>')">
                 <i class="fa fa-plus-circle"> </i> Adicionar nova comanda
             </button>
             <a href="<?= URL ?>dashboard" type="button" class="btn btn-default">
@@ -17,35 +17,44 @@
         </div><br><br>        
 
         <div class="row">
-            <?php for ($y = 0; $y < 4; $y++) { ?>
-            
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-blue">
-                    <a href="<?= URL?>pedido">     
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-pencil-square-o fa-4x"></i>
+            <?php
+            if (count($this->comandas) > 0) {
+                foreach ($this->comandas as $comanda) { ?>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-blue">
+                            <a href="<?= URL ?>pedido">     
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-pencil-square-o fa-4x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?= $comanda->getNumeroPedidos() ?></div>
+                                            <div>Pedidos</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">6</div>
-                                    <div>Pedidos</div>
+                                <div class="panel-footer">
+                                    <span class="pull-left"> Comanda #<?= $comanda->getCodigo() ?>  </span>
+                                    <br>
+                                    <span class="pull-right">Total : R$ <?= $comanda->getValorTotal() ?> </i></span>
+                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <div class="panel-footer">
-                            <span class="pull-left"> Comanda #11 </span>
-                            <span class="pull-right">Total : R$ 0 </i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
                     </div>
-                </div>
-               
-            <?php } ?>                
+
+                <?php
+                }
+            } else {
+                ?>  
+                <div class="col-lg-12 text-center">                
+                <h4 class="page-header">A <?= $this->titulo?> ainda não possui nenhuma comanda </h4>                
             </div>
-        </div>                 
-    </div>
+<?php } ?>
+        </div>
+    </div>                 
+</div>
 <!--  Confirma inserção de comanda  -->
 
 <div class="modal fade inserirComanda" tabindex="-1" role="dialog" aria-labelledby="" data-backdrop="static">
@@ -53,11 +62,12 @@
         <div class="modal-content">
             <div class="modal-header btn-warning">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" >Messa #01 - Breakfast </h4>
+                <h4 class="modal-title" ><?= $this->titulo ?> - Breakfast </h4>
             </div>
-            <form method="post">
+            <form id="adicionarComanda" action="<?php echo URL?>comanda/adicionarComanda" method="post">
+                <input type="hidden" value="<?=$this->mesa?>" name="mesa" >
                 <div class="modal-body">
-                    Inserir comanda na mesa #01 ?   
+                    Inserir comanda na <?= $this->titulo ?>  ?   
                 </div> 
                 <div class="modal-footer">
                     <a href="" type="submit" class="btn btn-success">Sim</a>

@@ -6,9 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?= URL ?>dashboard">
-            <!--img src="<?= URL ?>public/img/logo-bar.jpg" alt="" width="35" height="35"/-->
-        </a>
+        <a class="navbar-brand" href="<?= URL ?>dashboard">BreakFast</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -42,7 +40,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuração</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?= URL ?>dashboard/logout"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -54,30 +52,92 @@
                 
         </li>
     </ul>
+    <!-- /.navbar-top-links -->
 
-    <div class="navbar-default sidebar " role="navigation">
+    <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li><a href="<?= URL ?>dashboard"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
-                <li><a href="<?= URL ?>caixa"><i class="fa fa-calculator fa-fw"></i> Caixa</a></li>
+               
                 <li>
-                   <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cozinha <span class="fa arrow"></span></a> 
-                   <ul class="nav nav-second-level">
-                        <li><a href="<?= URL ?>verpedidos"><i class="fa fa-eye fa-fw"></i> Ver Pedidos</a></li>
-                        <li><a href="<?= URL ?>despensa"><i class="fa fa-bars"></i> Despensa</a></li>                       
-                   </ul>
+                    <a href="<?= URL ?>dashboard"><i class="fa fa-home fa-fw"></i> Inicio</a>
+                </li>
+                <li>
+                    <a href="<?= URL ?>caixa"><i class="fa fa-calculator fa-fw"></i> Caixa</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-cutlery fa-fw"></i> Cozinha <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?= URL ?>"><i class="fa fa-users fa-fw"></i>Ver Pedido</a>
+                        </li>
+                        <li>
+                            <a href="<?= URL ?>"><i class="fa fa-book fa-fw"></i> Dispensa</a>
+                        </li>
+                    </ul>                    
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-cogs fa-fw"></i> Gerenciar<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="<?= URL ?>usuario"><i class="fa fa-users fa-fw"></i> Usuário</a></li>
-                        <li><a href="<?= URL ?>produto"><i class="fa fa-book fa-fw"></i> Catálogo</a></li>
-                        <li><a href="<?= URL ?>mesa"><i class="glyphicon glyphicon-blackboard fa-fw"></i> Mesa</a></li>
-                        <li><a href="<?= URL ?>categoria"><i class="fa fa-tags fa-fw"></i> Categorias de produto</a></li>
-                        <li><a href="<?= URL ?>setor"><i class="fa fa-cubes fa-fw"></i> Setor de atendimento</a></li>
+                        <li>
+                            <a href="<?= URL ?>usuario"><i class="fa fa-users fa-fw"></i> Usuário</a>
+                        </li>
+                        <li>
+                            <a href="<?= URL ?>produto"><i class="fa fa-book fa-fw"></i> Catálogo</a>
+                        </li>
+                        <li>
+                            <a href="<?= URL ?>mesa"><i class="glyphicon glyphicon-blackboard fa-fw"></i> Mesa</a>
+                        </li>
+                        <li>
+                           <a href="<?= URL ?>categoria"><i class="fa fa-tags fa-fw"></i> Categorias de produto</a>
+                        </li>
+                        <li>
+                            <a href="<?= URL ?>setor"><i class="fa fa-cubes fa-fw"></i> Setor de atendimento</a>
+                        </li>
+
                     </ul>
-                </li>                
+                    <!-- /.nav-second-level -->
+                </li>
+                <!--                        <li>
+                                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <a href="flot.html">Flot Charts</a>
+                                                </li>
+                                                <li>
+                                                    <a href="morris.html">Morris.js Charts</a>
+                                                </li>
+                                            </ul>
+                                             /.nav-second-level 
+                                        </li>                        
+                                        <li>
+                                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <a href="panels-wells.html">Panels and Wells</a>
+                                                </li>
+                                                <li>
+                                                    <a href="buttons.html">Buttons</a>
+                                                </li>
+                                                <li>
+                                                    <a href="notifications.html">Notifications</a>
+                                                </li>
+                                                <li>
+                                                    <a href="typography.html">Typography</a>
+                                                </li>
+                                                <li>
+                                                    <a href="icons.html"> Icons</a>
+                                                </li>
+                                                <li>
+                                                    <a href="grid.html">Grid</a>
+                                                </li>
+                                            </ul>
+                                             /.nav-second-level 
+                                        </li>-->
+
+                
             </ul>
         </div>
+        <!-- /.sidebar-collapse -->
     </div>
+    <!-- /.navbar-static-side -->
 </nav>

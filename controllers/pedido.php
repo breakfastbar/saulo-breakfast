@@ -6,6 +6,7 @@ class Pedido extends Controller {
         parent::__construct();
         $this->view->titulo = 'Pedido #001';
         $this->view->subTitulo = '';
+        $this->view->js = array('pedido/js/default.js');
     }
 
     function index() {

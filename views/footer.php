@@ -1,3 +1,6 @@
+
+</div>
+
 <!-- jQuery -->
 <script src="<?= URL ?>public/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?= URL ?>public/js/jquery-ui.min.js" ></script>
@@ -15,6 +18,8 @@
 <!-- DataTables JavaScript -->
 <script src="<?= URL ?>public/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="<?= URL ?>public/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script src="<?= URL ?>public/js/bootstrap-dialog.js" type="text/javascript"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 </body>
+
 </html>

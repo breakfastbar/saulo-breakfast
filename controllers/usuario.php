@@ -33,7 +33,6 @@ class Usuario extends Controller {
         }
 
         $this->view->render('header');
-        $this->view->render('navbar');        
         $this->view->render('usuario/addEdit');
         $this->view->render('footer');
     }

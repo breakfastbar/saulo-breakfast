@@ -109,12 +109,12 @@
                                 <select type="text" class="form-control" name="setor_codSetor" required="">
                                     <option value="false">Selecione um setor...</option>
                                     <?php
-                                     /*   foreach ($this->listaSetor  as $key => $value) {
+                                        foreach ($this->listaSetor  as $key => $value) {
                                             ?>
                                             <option value="<?=$value['codSetor']?>"><?=$value['descricao']?></option>
                                             <?php
                                         }
-                                      */
+                                    
                                     ?>
                                 </select>
                                 <p class="help-block">Selecione a setor de atendimento da produto.</p>
@@ -126,13 +126,12 @@
                                 <select type="text" class="form-control" name="categoria_codCategoria" required="">
                                     <option value="false">Selecione uma categoria...</option>
                                     <?php
-                                    /*    foreach ($this->$categoriaModel  as $key => $value) {
+                                        foreach ($this->listaCategoria  as $key => $value) {
                                             ?>
                                             <option value="<?=$value['codCategoria']?>"><?=$value['descricao']?></option>
                                             <?php
                                         }
-                                     * 
-                                     */
+                                    
                                     ?>
                                 </select>
                                 <p class="help-block">Selecione a categoria do produto.</p>
@@ -142,7 +141,7 @@
                 </div> 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Salvar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="cancelaEdicao()"> Fechar</button>                    
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="cancelaEdicao()"> Cancelar</button>                    
                 </div>
             </form>
         </div>

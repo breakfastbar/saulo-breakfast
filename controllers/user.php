@@ -13,7 +13,6 @@ class User extends Controller {
         $this->view->userList = $this->model->userList();
         
         $this->view->render('header');
-        $this->view->render('navbar');
         $this->view->render('user/index');
         $this->view->render('footer');
     }

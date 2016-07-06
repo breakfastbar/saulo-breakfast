@@ -1,11 +1,11 @@
 <?php
 
-require_once 'models/categoria_model.php'; 
+require_once 'models/categoria_model.php';
 require_once 'models/setor_model.php';
 
 class Produto extends Controller {
 
-   public function __construct() {
+    public function __construct() {
         parent::__construct();
         $this->view->titulo = 'Produto';
         $this->view->subTitulo = 'Gerenciar produtos';
@@ -57,5 +57,13 @@ class Produto extends Controller {
         $this->model->deletar($codProduto);
         header('location: ' . URL . 'produto');
     }
+
+    public function selecionar($codProduto) {
+        $produto = $this->model->produtoSingleLista($codProduto);
+
+                
+                echo json_encode($produto[0]);
+        
+        }
 
 }

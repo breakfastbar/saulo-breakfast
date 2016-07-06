@@ -82,13 +82,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" >Inserir pedido na comanda</h4>
             </div>
-            <form method="post" action="<?php echo URL; ?>produto/novo">
+            <form method="post" id="adicionarPedido" action="<?php echo URL; ?>produto/novo">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Código do produto</label>
-                                <input type="text" class="form-control" name="codigo" placeholder="insira aqui o mesmo codigo do cardápio" required="">
+                                <input type="text" class="form-control" onchange="selecionarProduto(this.value)" name="codigo" placeholder="insira aqui o mesmo codigo do cardápio" required="">
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Descrição</label>
-                                <input type="text" class="form-control" name="descricao" placeholder="Está informação será inserida automática" required="" disabled="">
+                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Está informação será inserida automática" required="" disabled="">
                             </div>
                         </div>
                     </div>                    
@@ -104,7 +104,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Quantidade</label>
-                                <input type="number" class="form-control" min="1" max="250">
+                                <input type="number" class="form-control" id="quantidade" value="1" min="1" max="250" onchange="atualizarValor()">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -113,7 +113,8 @@
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><b>R$</b>
                                     </span>
-                                    <input type="text" placeholder="0.00" class="form-control" name="valor" required="" disabled="">                                   
+                                    <input type="hidden" id="valorProduto" >
+                                    <input type="text" placeholder="0.00" id="valor" class="form-control" name="valor" required="" disabled="">                                   
                                 </div>
                             </div>
                         </div>                        
@@ -127,3 +128,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function cancelaEdicao() {
+        location.reload();
+    }
+</script>

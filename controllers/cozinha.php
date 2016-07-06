@@ -1,17 +1,17 @@
 <?php
 
-class Despensa extends Controller {
+class Cozinha extends Controller {
 
     function __construct() {
         parent::__construct();
-        $this->view->titulo = "Despensa";
-        $this->view->subTitulo = "Atualizar despensa";
+        $this->view->titulo = "Cozinha";
+        $this->view->subTitulo = "Gerenciar pedido";
     }
     
     function index() {
         $this->view->render('header');
         $this->view->render('navbar');
-        $this->view->render('despensa/index');
+        $this->view->render('cozinha/index');
         $this->view->render('footer');
 
     }
