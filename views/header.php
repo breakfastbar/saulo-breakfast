@@ -23,7 +23,7 @@
 
         <!-- Custom CSS -->
         <link href="<?= URL ?>public/dist/css/sb-admin-2.css" rel="stylesheet">
-        <!-- <link href="<?php // URL   ?>public/css/estiloProjeto.css" rel="stylesheet"> Só me atrapalhou FDP  -->
+        <!-- <link href="<?php // URL    ?>public/css/estiloProjeto.css" rel="stylesheet"> Só me atrapalhou FDP  -->
 
         <!-- Custom Fonts -->
         <link href="<?= URL ?>public/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -39,11 +39,11 @@
         <!-- DataTables Responsive CSS -->
         <link href="<?= URL ?>public/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
         <!-- Dialog Mensagem -->
         <link href="<?= URL ?>public/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css"/>
-        
+
         <!-- Mascara Telefone -->
         <script type="text/javascript">
             /* Máscaras ER */
@@ -73,8 +73,8 @@
                 }
             }
         </script>
-
        
+
         <?php
         if (isset($this->js)) {
             foreach ($this->js as $js) {

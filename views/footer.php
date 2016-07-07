@@ -12,8 +12,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<?= URL ?>public/dist/js/sb-admin-2.js"></script>
-
+ <script src="<?= URL ?>public/js/jquery-monkey.js" type="text/javascript"></script>
 <script src="<?= URL ?>public/js/scriptProjeto.js"></script>
+
 
 <!-- DataTables JavaScript -->
 <script src="<?= URL ?>public/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>

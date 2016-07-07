@@ -91,7 +91,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Valor pago pelo cliente:</label>
-                                <input type="text" class="form-control" name="valorPago" placeholder="Insira aqui o valor pago pelo cliente" required="">
+                                <input type="text" class="form-control" id="dinheiro" name="valorPago" placeholder="Insira aqui o valor pago pelo cliente" required="">
                             </div>
                         </div>
                     </div>                   

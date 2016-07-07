@@ -79,7 +79,7 @@
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-usd"></i>
                                     </span>
-                                    <input type="text" placeholder="Valor do produto" class="form-control" name="valor" required="" onkeypress="return(MascaraMoeda(this, '', '.', event))">                                   
+                                    <input type="text" placeholder="Valor do produto" class="form-control" name="valor" required="" id="dinheiro"))">                                   
                                 </div>
                                 <p class="help-block">Informe o valor do produto.(Apenas números)</p>
                             </div>

@@ -20,15 +20,31 @@ $(function () {
 
 // Chamada da table tela setor ::
 
-$(document).ready(function() {
-    var table = ['setor', 
-                 'despensa',
-                 'pedido'];                 
-    for(tabela in table){
-       $('#dataTables-'+ table[tabela]).DataTable({
-          responsive: true
-       });    
+$(document).ready(function () {
+    var table = ['setor',
+        'despensa',
+        'pedido'];
+    for (tabela in table) {
+        $('#dataTables-' + table[tabela]).DataTable({
+            responsive: true
+        });
     }
-    
-});
 
+});
+$(document).ready(function () {
+    /* Padrão */
+    $("#dinheiro").maskMoney({
+        symbol: "US$", /* Símbolo da moeda */
+        decimal: ".", /* Separador de decimais */
+        thousands: "", /* Separador de milhares */
+        precision: 2, /* Precisão dos decimais */
+        allowZero: false, /* Libera o 0 à esquerda */
+        showSymbol: false /* Mostrar símbolo da moeda */
+    });
+    /* Configuração para Real */
+    $(".classe_dos_campos").maskMoney({
+        symbol: "R$", /* Símbolo da moeda */
+        decimal: ", ", /* Separador de decimais */
+        thousands: ".", /* Separador de milhares */
+    });
+});
