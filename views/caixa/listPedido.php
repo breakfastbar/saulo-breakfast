@@ -11,11 +11,11 @@
                 </div>
 
                 <div class="col-md-7 text-right">
-                    <a href="javascript:window.history.go(-1)" class="btn btn-large btn-default" >
-                        <i class="fa fa-mail-reply"> </i> Voltar pedido
+                    <a href="<?php echo URL?>caixa" class="btn btn-large btn-default" >
+                        <i class="fa fa-mail-reply"> </i> Voltar a mesas
                     </a>
                     <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target=".inserirItem">
-                        <i class="fa fa-plus-circle"> </i> Adicionar pedido
+                        <i class="fa fa-minus-circle"> </i> Fechar comanda
                     </button>
                 </div>
             </div><br>
@@ -83,46 +83,18 @@
         <div class="modal-content">
             <div class="modal-header btn-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" >Inserir pedido na comanda</h4>
+                <h4 class="modal-title" >Realizar fechamento da comanda #<?php echo $this->comanda->getCodigo() ?> </h4>
             </div>
-            <form method="post" id="adicionarPedido" action="<?php echo URL; ?>pedido/addPedido">
+            <form method="post" id="fecharComanda" action="<?php echo URL; ?>caixa/fecharComanda/<?php echo $this->comanda->getCodigo() ?>">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Código do produto</label>
-                                <input type="text" class="form-control" onchange="selecionarProduto(this.value)" name="codigo" placeholder="insira aqui o mesmo codigo do cardápio" required="">
+                                <label>Valor pago pelo cliente:</label>
+                                <input type="text" class="form-control" name="valorPago" placeholder="Insira aqui o valor pago pelo cliente" required="">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Descrição</label>
-                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Está informação será inserida automática" required="" disabled="">
-                            </div>
-                        </div>
-                    </div>                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Quantidade</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade" value="1" min="1" max="250" onchange="atualizarValor()">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Valor</label>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><b>R$</b>
-                                    </span>
-                                    <input type="hidden" id="valorProduto" name="valor">
-                                    <input type="hidden" name="codComanda" value="<?php echo $this->comanda->getCodigo() ?>">
-                                    <input type="text" placeholder="0.00" id="valor" class="form-control" required="" disabled="">                                   
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
+                    </div>                   
                 </div> 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Salvar</button>

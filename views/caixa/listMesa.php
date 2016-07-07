@@ -8,10 +8,7 @@
         </div>
 
         <div class="text-center">
-            <button type="button" class="btn btn-primary" onclick="addComanda('<?=$this->mesa?>')">
-                <i class="fa fa-plus-circle"> </i> Adicionar nova comanda
-            </button>
-            <a href="<?= URL ?>dashboard" type="button" class="btn btn-default">
+            <a href="<?= URL ?>caixa" type="button" class="btn btn-default">
                 <i class="fa fa-reply"> </i> Ver todas as mesas
             </a>            
         </div><br><br>        
@@ -22,7 +19,7 @@
                 foreach ($this->comandas as $comanda) { ?>
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-blue">
-                            <a href="<?= URL ?>pedido/listPedidos/<?= $comanda->getCodigo() ?> ">     
+                            <a href="<?= URL ?>caixa/listPedidos/<?= $comanda->getCodigo() ?> ">     
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-3">

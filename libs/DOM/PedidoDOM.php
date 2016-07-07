@@ -17,12 +17,12 @@ class PedidoDOM {
 
     private $codigo;
     private $quantidade;
-    private $status = 1;
+    private $status;
     private $horaSolicitacao;
     private $valor;
-    private $codigoProduto;
+    private $produto;
     
-
+    private $comanda;
 
     /**
      * Construtor do Objeto Pedido.<br>
@@ -30,12 +30,23 @@ class PedidoDOM {
      * $quantidade => parametro do tipo int, que indica a quantidade do produto no pedido
      *     
      */
-    public function __construct(Produto $p, $quantidade) {
+    function __construct($codigo = null, $quantidade = null, $status = null, $horaSolicitacao = null, $valor = null, $produto = null, $comanda = null) {
+        $this->codigo = $codigo;
+        $this->quantidade = $quantidade;
+        $this->status = $status;
+        $this->horaSolicitacao = $horaSolicitacao;
+        $this->valor = $valor;
+        $this->produto = $produto;
+        $this->comanda = $comanda;
+    }
+
+    public function sa(ProdutoDOM $p,$comanda, $quantidade) {
         $this->produto = $p;
         $this->quantidade = $quantidade;
         $this->horaSolicitacao = date('d-m-y H:i:s');
         $this->valor = $p->getValor();
         $this->codigoProduto = $p->getCodigo();
+        $this->comanda = $comanda;
     }
     
     /**
@@ -99,7 +110,17 @@ class PedidoDOM {
      * Retorna um inteiro que corresponde o status do pedido<br>   
      */
     public function getStatus() {
-        return $this->Status;
+        return $this->status;
     }
+    
+    function getCodigoProduto() {
+        return $this->codigoProduto;
+    }
+
+    function getComanda() {
+        return $this->comanda;
+    }
+
+
 
 }

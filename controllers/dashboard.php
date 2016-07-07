@@ -11,7 +11,31 @@ class Dashboard extends Controller {
     function index() {
         $modelMesas = new Mesa_Model();
         $modelComandas = new Comanda_Model();
-        $this->view->mesas = $modelMesas->listaMesa();
+        $mesas = $modelMesas->listaMesa();
+        $this->view->disponivel = count($modelMesas->listMesaDisponivel());
+        $this->view->ocupado = count($modelMesas->listMesaOcupada());
+        
+        $mesasObj = array();
+        foreach ($mesas as $key => $value) {
+            $aux =  $modelComandas->listaComandas($value->getNumeroMesa());
+            $comandas = array();
+            foreach ($aux as $keya => $c) {
+                 $comanda = $modelComandas->comandaSingleObj($c->getCodigo());
+                 array_push($comandas, $comanda);
+            }           
+            $x = array(
+                'mesa' => $mesas[$key],
+                'comandas' => $comandas
+            );
+            array_push($mesasObj, $x);
+        }
+        
+        
+            
+
+
+
+        $this->view->mesas = $mesasObj;
         $this->view->comandas = $modelComandas->listaComandas();
         $this->view->render('header');
         $this->view->render('navbar');

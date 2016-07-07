@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,8 +34,14 @@ class ComandaDOM extends Exception {
      * <p>Constroi um objeto do tipo comanda, gerando o codigo da comanda atomatico com seu codigo de barra </p><br> 
      * $mesa => objeto do tipo Mesa <br>   
      */
-    public function __construct(MesaDOM $mesa, $codigo = null) {
+    function __construct(MesaDOM $mesa, $codigo = null, $status = C_ABERTA, $valorPago = null, $observacao = null, $criadaPor = null, $fechadaPor = null) {
+        
+        $this->status = $status;
+        $this->valorPago = $valorPago;
+        $this->observacao = $observacao;
         $this->mesa = $mesa;
+        $this->criadaPor = $criadaPor;
+        $this->fechadaPor = $fechadaPor;
         if ($codigo == null) {
             $this->codigo = $this->gerarCodigo();
             //new barCodeGenrator($this->codigo, 1, 'codeBarra/' . $this->codigo . '.png');        
@@ -69,6 +76,14 @@ class ComandaDOM extends Exception {
             $valorTotal += $pedido->getValorTotal();
         }
         return $valorTotal;
+    }
+    
+    public function addPedidoPronto($pedido){
+        if(array_push($this->pedidos, $pedido)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -147,7 +162,7 @@ class ComandaDOM extends Exception {
      * 
      */
     public function fecharComanda($valorPago) {
-        if ($this->status == C_EM_FECHAMENTO) {
+        if ($this->status == C_ABERTA) {
             $this->valorPago = $valorPago;
             if ($valorPago == 0) {
                 $this->observacao = "Comanda fechada sem pagamento";

@@ -12,7 +12,7 @@ class Comanda_Model extends Model {
         } else {
             $acomandas = $this->db->select('SELECT * FROM comanda where status <> 2 and numeroMesa =' . $mesa);
         }
-        
+
         $modelMesa = new Mesa_Model();
         $comandas = array();
         foreach ($acomandas as $value) {
@@ -20,12 +20,41 @@ class Comanda_Model extends Model {
             $a = new ComandaDOM($mesa, $value['codComanda']);
             array_push($comandas, $a);
         }
-        
+
         return $comandas;
     }
 
-    public function categoriaSingleLista($codCategoria) {
-        return $this->db->select('SELECT * FROM categoria WHERE codCategoria = :codCategoria', array(':codCategoria' => $codCategoria));
+    public function categoriaSingleLista($codComanda) {
+        return $this->db->select('SELECT * FROM comanda WHERE codComanda = :codComanda', array(':codComanda' => $codComanda));
+    }
+
+    /**
+     * 
+     * @param type $codComanda
+     * @return \ComandaDOM
+     */
+    public function comandaSingleObj($codComanda) {
+        $modelPedido = new Pedido_Model();
+        $pedidos = $modelPedido->listaPedidosObj($codComanda);
+
+        $modelMesa = new Mesa_Model();
+
+        $acomanda = $this->db->select('SELECT * FROM comanda WHERE codComanda = :codComanda', array(':codComanda' => $codComanda));
+        $acomanda = $acomanda[0];
+        $mesa = $modelMesa->selecionar($acomanda['numeroMesa']);
+
+        $comanda = new ComandaDOM($mesa, $acomanda['codComanda'], $acomanda['status'], $acomanda['valorPago'], $acomanda['observacao'], $acomanda['criadaPor'], $acomanda['fechadaPor']);
+        foreach ($pedidos as $key => $pedido) {
+            $comanda->addPedidoPronto($pedido);
+        }
+
+
+        return $comanda;
+
+
+
+        //$comanda = new ComandaDOM($acomanda['numeroMesa'], $acomanda['codComanda']);
+        //return $comanda;
     }
 
     public function create($comanda) {
@@ -38,7 +67,6 @@ class Comanda_Model extends Model {
             'fechadaPor' => null,
             'numeroMesa' => $comanda->getMesa()->getNumeroMesa()
         );
-        print_r($dados);
         $inseriu = $this->db->insert('comanda', $dados);
         if ($inseriu[0] == 00000) {
             $mensagem = array('tipo' => 'INFORMACAO', 'mensagem' => MSG2);
@@ -59,6 +87,26 @@ class Comanda_Model extends Model {
 
     public function deletar($codCategoria) {
         $this->db->delete('categoria', "codCategoria = '$codCategoria'");
+    }
+
+    public function fecharComanda($comanda) {
+
+       
+        $postData = array(
+            'valorPago' => $comanda->getValorPago(),
+            'observacao' => $comanda->getObservacao(),
+            'status' => $comanda->getStatus()
+        );
+        $codComanda = $comanda->getCodigo();
+        $atualizou = $this->db->update('comanda', $postData, "codComanda = " . $codComanda);
+        $mesaOcupada = $this->db->select('SELECT * FROM comanda where numeroMesa =' . $comanda->getMesa()->getNumeroMesa() . ' and status = 1');
+        if(count($mesaOcupada) == 0){        
+        $dadosMesa = array(
+            'status' => M_DISPONIVEL
+        );
+        $this->db->update('mesa', $dadosMesa, "numeroMesa = " . $comanda->getMesa()->getNumeroMesa());
+        }
+        
     }
 
 }

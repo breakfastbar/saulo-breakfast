@@ -4,6 +4,10 @@ require 'util/Auth.php';
 require './libs/DOM/UsuarioDOM.php';
 require './libs/DOM/MesaDOM.php';
 require './libs/DOM/ComandaDOM.php';
+require './libs/DOM/ProdutoDOM.php';
+require './libs/DOM/PedidoDOM.php';
+require './libs/DOM/SetorDOM.php';
+require './libs/DOM/CategoriaDOM.php';
 
 function __autoload($class) { 
     if (file_exists(LIBS . $class . ".php")) { 

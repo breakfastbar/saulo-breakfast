@@ -15,7 +15,19 @@ class Mesa_Model extends Model {
         }
         return $mesas;
     }
+    
+    public function listMesaOcupada(){
+        return $this->db->select('SELECT * FROM mesa where ativo = 1 and status = '.M_OCUPADA);
+    }   
+    public function listMesaDisponivel(){
+        return $this->db->select('SELECT * FROM mesa where ativo = 1 and status = '.M_DISPONIVEL);
+    }
 
+    /**
+     * 
+     * @param type $numeroMesa
+     * @return \MesaOBJ
+     */
     public function selecionar($numeroMesa) {
         $aMesa = $this->db->select('SELECT * FROM mesa WHERE numeroMesa = ' . $numeroMesa);
         return new MesaDOM($aMesa[0]['numeroMesa'], $aMesa[0]['status']);
@@ -51,5 +63,12 @@ class Mesa_Model extends Model {
             }
         }
     }
+    
+     public function statusOcupado($codMesa){
+         $postData = array(
+            'status' => M_OCUPADA,
+        );
+        $atualizou = $this->db->update('mesa', $postData, "numeroMesa = ". $codMesa );
+     }
 
 }
